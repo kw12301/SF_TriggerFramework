@@ -1,18 +1,16 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
+* @date May 17, 2022
 * @group Test Classes
 * @description before insert trigger handler test for object 
 */
 @isTest 
-private class ErrorLogBeforeInsertTriggerHandlerTest 
-{
+private class ErrorLogBeforeInsertTriggerHandlerTest {
 
-	static testMethod void insertTestSuccess() 
-	{
+	@isTest
+	static void insertTestSuccess() {
 		List<ErrorLog__c> logs = new List<ErrorLog__c>();
-		for(Integer i = 0; i < 50; i++)
-		{
+		for(Integer i = 0; i < 50; i++)	{
 			ErrorLog__c l = new ErrorLog__c();
 			l.Cause__c = 'Test Cause';
 			l.DMLFieldNames__c = 'Field1,Field2';
@@ -30,8 +28,8 @@ private class ErrorLogBeforeInsertTriggerHandlerTest
 		System.assertEquals(50,newLogs.size(),'Unexpected record count.  Expected 50');
 	}
 
-	static testMethod void testDuplicateEntryIdentification()
-	{
+	@isTest
+	static void testDuplicateEntryIdentification() {
 		Test.startTest();
 		TestDataFactory.generateErrorLogs(StaticResources.TEST_LIST_SIZE);
 		Test.stopTest();
@@ -41,8 +39,8 @@ private class ErrorLogBeforeInsertTriggerHandlerTest
 		System.assertEquals((dupes.size()/2),dupeId.size(),'dupe identification failed');
 	}
 
-	static testMethod void testSingleInsert()
-	{
+	@isTest
+	static void testSingleInsert(){
 		Test.startTest();
 		Map<id,ErrorLog__c> log = TestDataFactory.createErrorLogs(1, 'Account', 'Salesforce Exception', 'Undefined', null);
 		Test.stopTest();

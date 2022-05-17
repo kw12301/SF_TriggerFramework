@@ -1,25 +1,27 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
+* @date May 17, 2022
 * @group Test Classes
 * @description before update trigger handler test for object 
 */
 @isTest 
-private class ErrorLogBeforeUpdateTriggerHandlerTest 
-{
+private class ErrorLogBeforeUpdateTriggerHandlerTest {
+	/**
+	 * @description setup test data from test data factory
+	 */
 	@testSetup
-	static void setupTestData()
-	{
+	static void setupTestData()	{
 		TestDataFactory.generateErrorLogs(StaticResources.TEST_LIST_SIZE);
 	}
 
-	static testMethod void updateTestSuccess() 
-	{
+	/**
+	 * @description test duplicate logic
+	 */
+	@isTest
+	static void updateTestSuccess() {
 		Map<Id,ErrorLog__c> logs = new Map<Id,ErrorLog__c>(ErrorLogHelper.getErrorLogs());
-		for(ErrorLog__c l : logs.values())
-		{
-			if(l.Duplicate__c == true)
-			{
+		for(ErrorLog__c l : logs.values()){
+			if(l.Duplicate__c == true){
 				l.Duplicate__c = false;
 			}
 		}
@@ -30,12 +32,14 @@ private class ErrorLogBeforeUpdateTriggerHandlerTest
 		List<ErrorLog__c> dupes = [Select Id From ErrorLog__c Where Duplicate__c = true];
 		System.assertNotEquals(true,dupes.isEmpty(),'dupes are empty');
 	}
-
-	static testMethod void testFieldUpdateDupeCheck()
-	{
+	
+	/**
+	 * @description test duplicate logic
+	 */
+	@isTest
+	static void testFieldUpdateDupeCheck(){
 		Map<Id,ErrorLog__c> logs = new Map<Id,ErrorLog__c>(ErrorLogHelper.getErrorLogs());
-		for(ErrorLog__c l : logs.values())
-		{
+		for(ErrorLog__c l : logs.values()){
 			l.ErrorStackTrace__c = '';
 		}
 		Test.startTest();

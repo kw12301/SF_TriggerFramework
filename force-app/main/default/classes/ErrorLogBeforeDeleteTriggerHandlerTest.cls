@@ -1,26 +1,22 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
+* @date May 17, 2022
 * @group Test Classes
 * @description before delete trigger handler test for object 
 */
 @isTest 
-private class ErrorLogBeforeDeleteTriggerHandlerTest 
-{
+private class ErrorLogBeforeDeleteTriggerHandlerTest {
 	@testSetup
-	static void setupTestData()
-	{
+	static void setupTestData()	{
 		TestDataFactory.generateErrorLogs(StaticResources.TEST_LIST_SIZE);
 	}
 
-	static testMethod void deleteTestSuccess() 
-	{
+	@isTest
+	static void deleteTestSuccess() {
 		Map<Id,ErrorLog__c> logs = new Map<Id,ErrorLog__c>(ErrorLogHelper.getErrorLogs());
 		List<ErrorLog__c> dupes = new LIst<ErrorLog__c>();
-		for(ErrorLog__c l : logs.values())
-		{
-			if(l.Duplicate__c == true)
-			{
+		for(ErrorLog__c l : logs.values()){
+			if(l.Duplicate__c == true){
 				dupes.add(l);
 			}
 		}
@@ -32,8 +28,8 @@ private class ErrorLogBeforeDeleteTriggerHandlerTest
 		System.assertNotEquals(true, noDupes.isEmpty(),'dupes are not empty');
 	}
 
-	static testMethod void deleteAgedLogsSuccess()
-	{
+	@isTest
+	static void deleteAgedLogsSuccess(){
 		Integer target = -5;
 		Test.startTest();
 		ErrorLogHelper.deleteAgedErrorLogs(target);

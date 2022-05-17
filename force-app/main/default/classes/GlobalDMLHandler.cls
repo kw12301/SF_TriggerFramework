@@ -1,251 +1,167 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
-* @group Trigger Framework
-* @description global class for dml transactions
-**/
+* @date May 17, 2022
+* @group Framework
+* @description global class for dml transactions.  Writes errors to LoggingHandler
+*/
 
-public with sharing class GlobalDMLHandler 
-{
+public with sharing class GlobalDMLHandler {
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Insert object method
-    * @param sObj the sObject to insert
+    * @param Sobject the sObject to insert
     */
-    public static void insertObject(Sobject sObj) 
-    {
-        try 
-        {
-            insert sObj;
-        } 
-        catch(Exception ex) 
-        {
+    public static void insertObject(Sobject sObj) {
+        List<SObject> objects = new LIst<SObject>{sobj};
+        String objectName = (null != objects && objects.size() > 0) ? String.valueOf(objects[0].getSObjectType()) : null;
+        try {
+            Database.SaveResult[] results = Database.insert(objects,false);
+            LoggingHandler.processSaveResults(results,objectName);
+        } catch(Exception ex) {
             LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObj.getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Upsert object method
-    * @param sObj the sObject to upsert
+    * @param Sobject the sObject to upsert
     */
-    public static void upsertObject(Sobject sObj) 
-    {
-        try 
-        {
-            upsert sObj;
-        } 
-        catch(Exception ex) 
-        {
+    public static void upsertObject(Sobject sObj) {
+        List<SObject> objects = new LIst<SObject>{sobj};
+        String objectName = (null != objects && objects.size() > 0) ? String.valueOf(objects[0].getSObjectType()) : null;
+        try {
+            Database.UpsertResult[] results = Database.upsert(objects,false);
+            LoggingHandler.processUpsertResults(results,objectName);
+        } catch(Exception ex) {
             LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObj.getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Update object method
-    * @param sObj the sObject to update
+    * @param Sobject the sObject to update
     */
-    public static void updateObject(Sobject sObj) 
-    {
-        try 
-        {
-            update sObj;
-        } 
-        catch(Exception ex) 
-        {
+    public static void updateObject(Sobject sObj) {
+        List<SObject> objects = new LIst<SObject>{sobj};
+        String objectName = (null != objects && objects.size() > 0) ? String.valueOf(objects[0].getSObjectType()) : null;
+        try {
+            Database.SaveResult[] results = Database.update(objects,false);
+            LoggingHandler.processSaveResults(results,objectName);
+        } catch(Exception ex) {
             LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObj.getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
     
     /**
     * @author Kevin Winn
-    * @date 12/31/2019
+    * @date May 17, 2022
     * @description Delete object method
-    * @param sObj the sObject to delete
+    * @param Sobject the sObject to delete
     */
-    public static void deleteObject(Sobject sObj) 
-    {
-        try 
-        {
-            delete sObj;
-        } 
-        catch(Exception ex) 
-        {
+    public static void deleteObject(Sobject sObj) {
+        List<SObject> objects = new LIst<SObject>{sobj};
+        String objectName = (null != objects && objects.size() > 0) ? String.valueOf(objects[0].getSObjectType()) : null;   
+        try {
+            Database.DeleteResult[] results = Database.delete(objects,false);
+            LoggingHandler.processDeleteResults(results,objectName);
+        } catch(Exception ex) {
             LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObj.getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
 
     /**
     * @author Kevin Winn
-    * @date 12/31/2019
+    * @date May 17, 2022
     * @description Delete object method
-    * @param sObj the sObject to delete
+    * @param Sobject the sObject to delete
     */
-    public static void undeleteObject(Sobject sObj) 
-    {
-        try 
-        {
-            undelete sObj;
-        } 
-        catch(Exception ex) 
-        {
+    public static void undeleteObject(Sobject sObj) {
+        List<SObject> objects = new LIst<SObject>{sobj};
+        String objectName = (null != objects && objects.size() > 0) ? String.valueOf(objects[0].getSObjectType()) : null;
+        try {
+            Database.UnDeleteResult[] results = Database.undelete(objects,false);
+            LoggingHandler.processUnDeleteResults(results,objectName);
+        } catch(Exception ex) {
             LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObj.getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
     
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Insert list of objects method
-    * @param sObjList the sObject list to insert
+    * @param List<Sobject> the sObject list to insert
     */
-    public static void insertObjectList(List<Sobject> sObjList) 
-    {
-        insertObjectList(sObjList,true);
+    public static void insertObjectList(List<Sobject> sObjList) {
+        String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;    
+        try {
+            Database.SaveResult[] results = Database.insert(sObjList,false);
+            LoggingHandler.processSaveResults(results,objectName);
+        } catch(Exception ex) {
+            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObjList[0].getSObjectType()));
+            LoggingHandler.popAll();
+        }
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
-    * @description Insert list of objects method
-    * @param sObjList the sObject list to insert
-    */
-    public static void insertObjectList(List<Sobject> sObjList,Boolean allOrNothing) 
-    {
-        if(allOrNothing)
-        {
-            try 
-            {
-                insert sObjList;
-            } 
-            catch(Exception ex) 
-            {
-                String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
-                LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, objectName);
-            }
-        }
-        else
-        {
-            LoggingHandler.processDatabaseSaveResults(Database.insert(SObjList,false));
-        }
-            
-    }
-
-
-
-    /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Upsert list of objects method
-    * @param sObjList the sObject list to upsert
+    * @param List<Sobject> the sObject list to upsert
     */
-    public static void upsertObjectList(List<Sobject> sObjList) 
-    {
-        upsertObjectList(sObjList,true);
-    }
-
-    /**
-    * @author Kevin Winn
-    * @date 12/31/2019
-    * @description Insert list of objects method
-    * @param sObjList the sObject list to upsert
-    */
-    public static void upsertObjectList(List<Sobject> sObjList,Boolean allOrNothing) 
-    {
-        if(allOrNothing)
-        {
-            try 
-            {
-                upsert sObjList;
-            } 
-            catch(Exception ex) 
-            {
-                String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
-                LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, objectName);
-            }
-        }
-        else
-        {
-            LoggingHandler.processDatabaseUpsertResults(Database.upsert(SObjList,false));
+    public static void upsertObjectList(List<Sobject> sObjList) {
+        String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
+        try {
+            Database.UpsertResult[] results = Database.upsert(sObjList,false);
+            LoggingHandler.processUpsertResults(results,objectName);
+        } catch(Exception ex) {
+            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObjList[0].getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Update list of objects method
-    * @param sObjList the sObject list to update
+    * @param List<Sobject> the sObject list to update
     */
-    public static void updateObjectList(List<Sobject> sObjList) 
-    {
-        updateObjectList(sObjList,true);
-    }
-
-    /**
-    * @author Kevin Winn
-    * @date 12/31/2019
-    * @description Insert list of objects method
-    * @param sObjList the sObject list to upsert
-    */
-    public static void updateObjectList(List<Sobject> sObjList,Boolean allOrNothing) 
-    {
-        if(allOrNothing)
-        {
-            try 
-            {
-                update sObjList;
-            } 
-            catch(Exception ex) 
-            {
-                String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
-                LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, objectName);
-            }
-        }
-        else
-        {
-            LoggingHandler.processDatabaseSaveResults(Database.update(SObjList,false));
+    public static void updateObjectList(List<Sobject> sObjList) {
+        String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
+        try {
+            Database.SaveResult[] results = Database.update(sObjList,false);
+            LoggingHandler.processSaveResults(results,objectName);
+        } catch(Exception ex) {
+            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObjList[0].getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
     
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Delete list of objects method
-    * @param sObjList the sObject list to delete
+    * @param List<Sobject> the sObject list to delete
     */
-    public static void deleteObjectList(List<Sobject> sObjList) 
-    {
+    public static void deleteObjectList(List<Sobject> sObjList) {
         String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
-        try 
-        {
-            delete sObjList;
-        } 
-        catch(Exception ex) 
-        {
-            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, objectName);
+        try {
+            Database.DeleteResult[] results = Database.delete(sObjList,false);
+            LoggingHandler.processDeleteResults(results,objectName);
+        } catch(Exception ex) {
+            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObjList[0].getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Undelete list of objects method
-    * @param sObjList the sObject list to undelete
+    * @param List<Sobject> the sObject list to undelete
     */
-    public static void undeleteObjectList(List<Sobject> sObjList) 
-    {
+    public static void undeleteObjectList(List<Sobject> sObjList) {
         String objectName = (null != sObjList && sObjList.size() > 0) ? String.valueOf(sObjList[0].getSObjectType()) : null;
-        try 
-        {
-            undelete sObjList;
-        } 
-        catch(Exception ex) 
-        {
-            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, objectName);
+        try {
+            Database.UnDeleteResult[] results = Database.undelete(sObjList,false);
+            LoggingHandler.processUnDeleteResults(results,objectName);
+        } catch(Exception ex) {
+            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, String.valueOf(sObjList[0].getSObjectType()));
+            LoggingHandler.popAll();
         }
     }
 }

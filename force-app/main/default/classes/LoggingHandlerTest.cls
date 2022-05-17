@@ -1,12 +1,11 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
+* @date May 17, 2022
 * @group Test Classes
 * @description tests for LoggingHandler.cls
 */
 @isTest
-public with sharing class LoggingHandlerTest 
-{
+public with sharing class LoggingHandlerTest {
     private static final String TEST_METHOD_NAME = 'testMethodName';
     private static final String TEST_DEBUGGING_MESSAGE = 'A test debug message.';
     private static final String OBJECT_SETTING_NAME = 'Enable Object Logging';
@@ -18,63 +17,52 @@ public with sharing class LoggingHandlerTest
     private static final Integer TWO_COUNT = 2;
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'pushEntry' method
-    * @see LoggingHandler.pushEntry
     */
-    public static testmethod void testPushEntry()
-    {
+    @isTest
+    static void testPushEntry(){
         Test.startTest();
         LoggingHandler.pushEntry(TEST_METHOD_NAME, INTEGRATION);
         Test.stopTest();
-        System.assertEquals(LoggingHandler.logLevel, ONE_COUNT,'not 1');
-        System.assertEquals(LoggingHandler.debuggingLog.size(), ZERO_COUNT,'not zero');
-        System.assertEquals(LoggingHandler.stackTrace.size(), ONE_COUNT,'not one');
+        System.assertEquals(LoggingHandler.logLevel, ONE_COUNT,'Logging Level not 1 in testPushEntry');
+        System.assertEquals(LoggingHandler.debuggingLog.size(), ZERO_COUNT,'Debugging Log not zero in testPushEntry');
+        System.assertEquals(LoggingHandler.stackTrace.size(), ONE_COUNT,'StackTrace size not one in testPushEntry');
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'popEntry' method with an empty stack
-    * @see LoggingHandler.popEntry
     */
-    public static testmethod void testPopEntryEmptyStack()
-    {
+    @isTest
+    static void testPopEntryEmptyStack(){
         Test.startTest();
         LoggingHandler.popEntry();
         Test.stopTest();
-        System.assertEquals(LoggingHandler.logLevel, ZERO_COUNT,'not zero');
-        System.assertEquals(LoggingHandler.debuggingLog.size(), ZERO_COUNT,'not zero');
-        System.assertEquals(LoggingHandler.stackTrace.size(), ZERO_COUNT,'not zero');
+        System.assertEquals(LoggingHandler.logLevel, ZERO_COUNT,'LogLEvel not zero in testPopEntryEmptyStack');
+        System.assertEquals(LoggingHandler.debuggingLog.size(), ZERO_COUNT,'Debugging Log not zero in testPopEntryEmptyStack');
+        System.assertEquals(LoggingHandler.stackTrace.size(), ZERO_COUNT,'StackTrace size not zero in testPopEntryEmptyStack');
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'popEntry' method with a populated stack
     * @see LoggingHandler.popEntry
     */
-    public static testmethod void testPopEntryPopulatedStack()
-    {
+    @isTest
+    static void testPopEntryPopulatedStack(){
         Test.startTest();
         LoggingHandler.pushEntry(TEST_METHOD_NAME, INTEGRATION);
         LoggingHandler.pushEntry(TEST_METHOD_NAME, INTEGRATION);
         LoggingHandler.popEntry();
         Test.stopTest();
-        System.assertEquals(LoggingHandler.logLevel, ONE_COUNT,'not one');
-        System.assertEquals(LoggingHandler.debuggingLog.size(), ZERO_COUNT,'not zero');
-        System.assertEquals(LoggingHandler.stackTrace.size(), ONE_COUNT,'not one');
+        System.assertEquals(LoggingHandler.logLevel, ONE_COUNT,'logLevel not one in testPopEntryPopulatedStack');
+        System.assertEquals(LoggingHandler.debuggingLog.size(), ZERO_COUNT,'debuggingLog not zero in testPopEntryPopulatedStack');
+        System.assertEquals(LoggingHandler.stackTrace.size(), ONE_COUNT,'stackTrace not one in testPopEntryPopulatedStack');
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'popAll' method with an empty stack
-    * @see LoggingHandler.popAll
     */
-    public static testmethod void testPopAllEmptyStack()
-    {
+    @isTest
+    static void testPopAllEmptyStack(){
         Test.startTest();
         LoggingHandler.popAll();
         Test.stopTest();
@@ -84,13 +72,10 @@ public with sharing class LoggingHandlerTest
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'popAll' method with a populated stack
-    * @see LoggingHandler.popAll
     */
-    public static testmethod void testPopAllPopulatedStack()
-    {
+    @isTest
+    static void testPopAllPopulatedStack(){
         Test.startTest();
         LoggingHandler.pushEntry(TEST_METHOD_NAME, SALESFORCE);
         LoggingHandler.popAll();
@@ -101,13 +86,10 @@ public with sharing class LoggingHandlerTest
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'debug' method
-    * @see LoggingHandler.debug
     */
-    public static testmethod void testDebug()
-    {
+    @isTest
+    static void testDebug(){
         Test.startTest();
         LoggingHandler.debug(TEST_DEBUGGING_MESSAGE, SALESFORCE, null,null);
         Test.stopTest();
@@ -117,21 +99,15 @@ public with sharing class LoggingHandlerTest
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'debugException' method
-    * @see LoggingHandler.debugException
     */
-    public static testmethod void testDebugException()
-    {
+    @isTest
+    static void testDebugException(){
         Test.startTest();
-        try
-        {
+        try{
             String testString;
             Integer testNumber = Integer.valueOf(testString);
-        }
-        catch(Exception ex)
-        {
+        }catch(Exception ex){
             LoggingHandler.debugException(ex, SALESFORCE, null);
         }
         Test.stopTest();
@@ -140,13 +116,11 @@ public with sharing class LoggingHandlerTest
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'retrieveExceptionLog' method
     * @see LoggingHandler.retrieveExceptionLog
     */
-    public static testmethod void testRetrieveExceptionLog()
-    {
+    @isTest
+    static void testRetrieveExceptionLog(){
         Test.startTest();
         String testResult = LoggingHandler.retrieveExceptionLog();
         Test.stopTest();
@@ -154,13 +128,10 @@ public with sharing class LoggingHandlerTest
     }
 
     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
     * @description Test the 'retrieveExceptionLog' method
-    * @see TriggerException
     */
-    public static testmethod void testTriggerException()
-    {
+    @isTest
+    static void testTriggerException(){
         try{
             TriggerFactory.createTriggerDispatcher(Event.sObjectType);
         } catch(Exception ex){
@@ -168,43 +139,26 @@ public with sharing class LoggingHandlerTest
         }
     }
 
-     /**
-    * @author Kevin Winn
-    * @date 12/31/2019
-    * @description Test the 'retrieveExceptionLog' method
-    * @see TriggerException
-    */
-    public static testmethod void testTriggerCustomException()
-    {
-       String message = 'Test';
-       Test.startTest();
-       TriggerException.CustomExceptionTest exTest = new TriggerException.CustomExceptionTest(message);
-       Test.stopTest();
-       System.assert(null != exTest,'custom exception is null');
-    }
-
 	@isTest
-	static void testProcessDatabaseSaveResultsTest()
-	{
-		List<Quote> badQuotes = new List<Quote>();
-		badQuotes.add(new Quote(Term__c = 12));
+	static void testProcessDatabaseSaveResultsTest(){
+		List<Account> badAccounts = new List<Account>();
+		badAccounts.add(new Account());
 		Test.startTest();
-		LoggingHandler.processDatabaseSaveResults(Database.insert(badQuotes,false),'Quote');
+		LoggingHandler.processSaveResults(Database.insert(badAccounts,false),'Account');
 		Test.stopTest();
-		List<ErrorLog__c> logs = [Select Id From ErrorLog__c Where Object__c = 'Quote'];
-		System.assertNotEquals(true,logs.isEmpty(),'No log created for error on quote');
+		List<ErrorLog__c> logs = [Select Id From ErrorLog__c Where Object__c = 'Account'];
+		System.assertNotEquals(true,logs.isEmpty(),'No log created for error on Account');
 
 	}
 
 	@isTest
-	static void testProcessDatabaseUpsertResultsTest()
-	{
-		List<Quote> badQuotes = new List<Quote>();
-		badQuotes.add(new Quote(Term__c = 12));
+	static void testProcessDatabaseUpsertResultsTest(){
+		List<Account> badAccounts = new List<Account>();
+		badAccounts.add(new Account());
 		Test.startTest();
-		LoggingHandler.processDatabaseUpsertResults(Database.upsert(badQuotes,false),'Quote');
+		LoggingHandler.processUpsertResults(Database.upsert(badAccounts,false),'Account');
 		Test.stopTest();
-		List<ErrorLog__c> logs = [Select Id From ErrorLog__c Where Object__c = 'Quote'];
-		System.assertNotEquals(true,logs.isEmpty(),'No log created for error on quote');
+		List<ErrorLog__c> logs = [Select Id From ErrorLog__c Where Object__c = 'Account'];
+		System.assertNotEquals(true,logs.isEmpty(),'No log created for error on Account');
 	}
 }

@@ -1,24 +1,21 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
+* @date May 17, 2022
 * @group Test Classes
 * @description after update trigger handler test for object 
 */
 @isTest 
-private class ErrorLogAfterUpdateTriggerHandlerTest 
-{
+private class ErrorLogAfterUpdateTriggerHandlerTest {
 	@testSetup
-	static void setupTestData()
-	{
+	static void setupTestData()	{
 		TestDataFactory.generateErrorLogs(StaticResources.TEST_LIST_SIZE);
 	}
 
-	static testMethod void updateTestSuccess() 
-	{
+	@isTest
+	static void updateTestSuccess() {
 		Map<Id,ErrorLog__c> logs = new Map<Id,ErrorLog__c>(ErrorLogHelper.getErrorLogs());
 		Test.startTest();
-		for(ErrorLog__c l : logs.values())
-		{
+		for(ErrorLog__c l : logs.values()){
 			l.Duplicate__c = true;
 		}
 		GlobalDMLHandler.updateObjectList(logs.values());

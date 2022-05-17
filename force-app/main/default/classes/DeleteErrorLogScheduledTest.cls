@@ -1,21 +1,18 @@
 /**
 * @author Kevin Winn
-* @date 12/31/2019
+* @date May 17, 2022
 * @group Test Classes
 * @description Test successful deletion of error logs older than number of days 
 *  specified in DaysPriorToDeleteErrors Custom Label. If no label defined, defaults to 30
 */
 
 @isTest 
-public with sharing class DeleteErrorLogScheduledTest
-{
+public with sharing class DeleteErrorLogScheduledTest{
     /**
-    * @author Kevin Winn
-    * @date 01/01/2020
     * @description Test scheduler
     */
-    public static testMethod void errorLogScheduler() 
-    {  
+    @isTest
+    static void errorLogScheduler() {  
         Test.startTest();
         String jobId = System.schedule('Delete Error Logs Testing', TestDataFactory.CRON_JOB_EXPRESSION, new DeleteErrorLogScheduled());
         CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, NextFireTime FROM CronTrigger  WHERE id = :jobId ][0];
@@ -25,12 +22,10 @@ public with sharing class DeleteErrorLogScheduledTest
     }
     
     /**
-    * @author Kevin Winn
-    * @date 01/01/2020
     * @description Test error log creation
     */
-    public static testMethod void createErrorLog() 
-    {  
+    @isTest
+    static void createErrorLog() {  
         Account a = new Account();
         try {
             insert a;
@@ -43,15 +38,12 @@ public with sharing class DeleteErrorLogScheduledTest
     }
     
     /**
-    * @author Kevin Winn
-    * @date 01/01/2020
     * @description Test batch
     */
-    public static testMethod void batchDeleteErrorLogStandardUser() 
-    {  
+    @isTest
+    static void batchDeleteErrorLogStandardUser() {  
         User usr = TestDataFactory.createStandardUser();
-        System.runAs(usr) 
-        {
+        System.runAs(usr) {
             LoggingHandler.debug('Test String', 'Test Error', 'Test Object',null);
             Test.startTest();
             Database.executeBatch(new DeleteErrorLogBatch()); 
@@ -62,15 +54,12 @@ public with sharing class DeleteErrorLogScheduledTest
     }
 
     /**
-    * @author Kevin Winn
-    * @date 01/01/2020
     * @description Test batch
     */
-    public static testMethod void batchDeleteErrorLogAdminUser() 
-    {  
+    @isTest
+    static void batchDeleteErrorLogAdminUser()  {  
         User usr = TestDataFactory.createAdminUser();
-        System.runAs(usr) 
-        {
+        System.runAs(usr) {
             LoggingHandler.debug('Test String', 'Test Error', 'Test Object',null);
             Test.startTest();
             Database.executeBatch(new DeleteErrorLogBatch()); 
