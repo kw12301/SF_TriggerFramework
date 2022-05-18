@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>OpenFIGI</label>
+    <protected>true</protected>
+    <values>
+        <field>APIKey__c</field>
+        <value xsi:type="xsd:string">cb2b0aef-87f3-476a-97a5-38c32f88d4be</value>
+    </values>
+    <values>
+        <field>APISecret__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>APIVersion__c</field>
+        <value xsi:type="xsd:string">v3</value>
+    </values>
+    <values>
+        <field>BaseURL__c</field>
+        <value xsi:type="xsd:string">https://api.openfigi.com</value>
+    </values>
+    <values>
+        <field>FirmId__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Password__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Username__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

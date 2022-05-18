@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SObjectField__c</fullName>
+    <description>The field on the selected SObject this field assignments points towards.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>The field on the selected SObject this field assignments points towards.</inlineHelpText>
+    <label>SObject Field</label>
+    <metadataRelationshipControllingField>TradingMap__mdt.SObject__c</metadataRelationshipControllingField>
+    <referenceTo>FieldDefinition</referenceTo>
+    <relationshipLabel>Trading Maps</relationshipLabel>
+    <relationshipName>TradingMaps</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

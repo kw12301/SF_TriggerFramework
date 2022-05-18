@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_Number_Length</fullName>
+    <active>true</active>
+    <description>Number fields can be no longer than 18 digits</description>
+    <errorConditionFormula>DecimalPlaces__c +  NumberLength__c &gt; 18</errorConditionFormula>
+    <errorDisplayField>NumberLength__c</errorDisplayField>
+    <errorMessage>The sum of the number length and decimal places cannot exceed 18</errorMessage>
+</ValidationRule>

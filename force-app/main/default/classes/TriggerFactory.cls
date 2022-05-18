@@ -71,10 +71,10 @@ public with sharing class TriggerFactory {
             originalTypeName = originalTypeName.substringBefore('__c');
             dispatcherTypeName = originalTypeName + 'TriggerDispatcher';
         } else {
-            originalTypeName = null != MetadataQuery.NAMESPACE ? originalTypeName.substringAfter(MetadataQuery.NAMESPACE): originalTypeName;
+            //originalTypeName = null != MetadataQuery.NAMESPACE ? originalTypeName.substringAfter(MetadataQuery.NAMESPACE): originalTypeName;
             dispatcherTypeName = originalTypeName + 'TriggerDispatcher';
         }
-        Type obType = Type.forName(MetadataQuery.NAMESPACE,dispatcherTypeName);
+        Type obType = Type.forName(dispatcherTypeName);
         ITriggerDispatcher dispatcher = (obType == null) ? null : (ITriggerDispatcher)obType.newInstance();
         return dispatcher;
     }

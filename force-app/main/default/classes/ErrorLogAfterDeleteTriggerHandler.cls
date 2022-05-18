@@ -5,6 +5,7 @@
 * @description after delete trigger handler for object 
 */
 public with sharing class ErrorLogAfterDeleteTriggerHandler extends TriggerHandlerBase{
+	
 	public override void mainEntry(TriggerParameters tp) {
 		process((List<ErrorLog__c>)tp.oldList);
 	}

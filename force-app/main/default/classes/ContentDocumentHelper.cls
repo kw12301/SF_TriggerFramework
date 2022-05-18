@@ -5,24 +5,30 @@
 * @description contains methods to manage ContentDocument,ContentVersion, and Links
 */
 
-public with sharing class ContentDocumentHelper 
-{
-	public static Id upsertContentVersion(String documentTitle,String patchClass)
-    {
+public with sharing class ContentDocumentHelper {
+    /**
+     * @description method to insert or update a new ContentVersion
+     * @param String the Title for the ContentDocument.  
+     *                  This is the value used to find existing content documents of the same name.
+     *                  Returns the ContentVersion Id
+     * @param patchClass the body of the content document
+     * @return Type: Id 
+     */
+	public static Id upsertContentVersion(String documentTitle,String patchClass) {
         ContentVersion version = new ContentVersion();
         documentTitle = null == documentTitle ? 'MetadataService':documentTitle;
         Blob body = Blob.valueOf(patchClass);
 
-        try
-        {
+        try {
             version = [Select Id,VersionData,ContentDocumentId,PathOnClient
                         From ContentVersion 
                         Where ContentDocument.Title =: documentTitle
                         And IsLatest = true LImit 1];
+        } catch(Exception ex){
+            LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, 'ContentVersion');
+            LoggingHandler.popAll();
         }
-        catch(Exception ex){}
-        if(null == version.Id)
-        {
+        if(null == version.Id) {
             version.ContentLocation = 's';
             version.PathOnClient = documentTitle + '.txt';
             version.Title = documentTitle;
@@ -30,9 +36,7 @@ public with sharing class ContentDocumentHelper
             version.VersionData = body;
             insert version;
             return version.Id;
-        }
-        else
-        {
+        } else {
             ContentVersion newVersion = new ContentVersion();
             newVersion.ContentDocumentId = version.ContentDocumentId;
             newVersion.Title = documentTitle;
@@ -45,7 +49,12 @@ public with sharing class ContentDocumentHelper
         }
     }
 
-    private static void manageContentDocumentLink(Id versionId,Id linkedEntityId)
+    /**
+     * @description method to associate a ContentVersion with a LinkedEntity
+     * @param Id the Id of the ContentVersion
+     * @param LinkedEntityId The Id for the SObject record to create a ContentDocumentLink for the ContentVersion
+     */
+    public static void manageContentDocumentLink(Id versionId,Id linkedEntityId)
     {
         Id contentDocId = [Select ContentDocumentId 
                             From ContentVersion 

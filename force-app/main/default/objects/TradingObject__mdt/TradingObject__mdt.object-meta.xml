@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Metadata settings for Trading Data objects from Addepar Trading</description>
+    <label>Trading Object</label>
+    <pluralLabel>Trading Objects</pluralLabel>
+    <visibility>Protected</visibility>
+</CustomObject>

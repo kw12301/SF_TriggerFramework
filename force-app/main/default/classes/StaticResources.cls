@@ -9,6 +9,7 @@ public without sharing class StaticResources {
 	public static final String FSC_NAMESPACE = 'FinServ__';
     public static final String SCHWAB_GATEWAY_NAMESPACE = 'CSOVG__';
     public static final String ADDEPAR_V2_NAMESPACE = 'addeparsf__';
+    public static final String ADDEPAR_V3_NAMESPACE = '';
 	
     //regex
     public static final String EMPTY_STRING = '';
