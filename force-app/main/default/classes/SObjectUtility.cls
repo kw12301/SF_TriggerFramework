@@ -16,6 +16,15 @@ public virtual class SObjectUtility {
     }
 
     /**
+    * @description Gets the Schema.DescribeSObjectResult of the SObject.
+    * @param SObject The SObject to describe.
+    * @return Type: Schema.DescribeSObjectResult
+    */
+    public static Schema.DescribeSObjectResult getSObjectDescribeResult(SObject so) {
+        return so.getSObjectType().getDescribe();
+    }
+
+    /**
      *@description Validate string as acceptable for Salesforce Id.  Return null if invalid, otherwise valid Id as string
      *@param String the String value for the Id to validate
      *@return Type: String
@@ -30,8 +39,10 @@ public virtual class SObjectUtility {
 
     /**
      *@description Method to mimic Select * functionality of SQL.  Builds string query to select all fields from given sobject name.
+     *              If the running user cannot access all fields on the given object, a query exception is thrown.
      *@param String The sobject name to select all fields from
      *@return Type: String
+     *@example Database.query(SObjectUtility.selectAllFields('Account'));
     **/
     public static String selectAllFields(String sobjectName) 
     {
@@ -41,9 +52,11 @@ public virtual class SObjectUtility {
 
     /**
      *@description Method to mimic Select * functionality of SQL, but limited to mapped Addepar fields. 
+     *              If the running user cannot access all fields on the given object, a query exception is thrown.
      *@param String The sobject name to select all fields from
      *@param List<String> A list of strings containing the Salesforce field names mapped to Addepar fields.
      *@return Type: String
+     *@example Database.query(SObjectUtility.selectAllAddeparFields('Account',listOfFieldNames));
     **/
     public static String selectAllAddeparFields(String sobjectName,List<String> fieldList) {
         String query = ('Select ' + String.join(new List<String>(fieldList),',') + ' FROM ' + sobjectName);
