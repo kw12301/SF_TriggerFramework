@@ -4,7 +4,7 @@
 * @group Constants
 * @description contains all hard-coded values and constants
 */
-public without sharing class StaticResources {  
+public with sharing class StaticResources {  
 	//namespace
 	public static final String FSC_NAMESPACE = 'FinServ__';
     public static final String SCHWAB_GATEWAY_NAMESPACE = 'CSOVG__';
@@ -64,7 +64,7 @@ public without sharing class StaticResources {
     public static final String PUSHTOPIC_QUERY = 'Select Id, Name, CreatedDate, CreatedById, LastModifiedById, Cause__c, DMLId__c, ' +
                                                     'DMLIndex__c, DMLMessage__c,DMLFieldNames__c, DMLFields__c, DMLRecords__c, DMLStatusCode__c, ' +
                                                     'DMLType__c, ErrorSubType__c,ErrorType__c, LineNumber__c, Message__c, Object__c From ErrorLog__c';
-    public static final Decimal PUSHTOPIC_API_VERSION = 50.0;
+    public static final Decimal PUSHTOPIC_API_VERSION = 54.0;
     public static final Boolean PUSHTOPIC_NOTIFY_CREATE = true;
     public static final Boolean PUSHTOPIC_NOTIFY_UPDATE = true;
     public static final Boolean PUSHTOPIC_NOTIFY_UNDELETE = true;
