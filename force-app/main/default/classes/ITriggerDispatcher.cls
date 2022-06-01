@@ -1,7 +1,7 @@
 /**
  * @author  Kevin Winn
  * @date    May 17, 2022
- * @group Framework
+ * @group Trigger Framework
  * @description Defines the interface for the trigger dispatching architecture.
 */
 public interface ITriggerDispatcher {

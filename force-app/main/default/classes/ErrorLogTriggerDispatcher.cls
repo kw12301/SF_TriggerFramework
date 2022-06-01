@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Dispatchers
+* @group Trigger Dispatchers
 * @description This class extends the TriggerDispatcherBase to provide the dispatching functionality for the trigger actions 
 *				on the ErrorLog__c object. The event handlers support allowing and preventing actions for reentrant scenarios. 
 *				This is controlled by the flag isBeforeXxxxx and isAfterXxxxx member variables. These variables need to be set

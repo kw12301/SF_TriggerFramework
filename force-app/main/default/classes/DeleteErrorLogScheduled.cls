@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Scheduled 
+* @group Maintenance 
 * @description scheduling for deletion of error log records
 **/
 public with sharing class DeleteErrorLogScheduled implements Schedulable {

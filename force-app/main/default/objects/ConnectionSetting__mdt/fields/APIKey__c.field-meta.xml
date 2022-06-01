@@ -3,7 +3,7 @@
     <fullName>APIKey__c</fullName>
     <description>The API Key to connect to this endpoint</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>The API Key to connect to this endpoint</inlineHelpText>
     <label>API Key</label>
     <length>255</length>

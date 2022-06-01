@@ -10,6 +10,20 @@ public with sharing class StaticResources {
     public static final String SCHWAB_GATEWAY_NAMESPACE = 'CSOVG__';
     public static final String ADDEPAR_V2_NAMESPACE = 'addeparsf__';
     public static final String ADDEPAR_V3_NAMESPACE = '';
+    public static final String THIS_PACKAGE_NAMESPACE = ADDEPAR_V3_NAMESPACE;
+
+    //Metadata
+    public static final String QUALIFIED_API_NAME = 'QualifiedAPIName';
+    public static final String ID_FIELD = 'Id';
+    public static final String PROTECTED_X = 'Protected_x';
+    public static final String MASTER_LABEL = 'MasterLabel';
+    public static final String IS_TEST_DATA = 'IsTestData__c';
+    public static final String INLINE_HELP_TEXT = 'InlineHelpText__c';
+    public static final String HELP_LINK = 'HelpLink__c';
+    public static final String IS_ACTIVE_FIELD = 'IsActive__c';
+    public static final String CONNECTION_OBJECT = 'ConnectionSettings.';
+    public static final String SYSTEM_DEFAULT = 'Default';
+    public static final String SYSTEM_TEST = 'SystemTest';
 	
     //regex
     public static final String EMPTY_STRING = '';
@@ -32,10 +46,21 @@ public with sharing class StaticResources {
     public static final String METADATA_CUSTOM_FIELD = 'CustomField';
     public static final String FAULT = 'Fault';
     public static final String FAULT_STRING = 'faultstring';
-    public static final String SALESFORCE_EXCEPTION = 'Salesforce exception';
-    public static final String INTEGRATION_EXCEPTION = 'Integration exception';
     public static final String HTML_BOLD_OPEN = '<b>';
     public static final String HTML_BOLD_CLOSE = '</b>';
+
+    //exceptions
+    public static final String SALESFORCE_EXCEPTION = 'Salesforce exception';
+    public static final String INTEGRATION_EXCEPTION = 'Integration exception';
+    public static final String NO_ACCESS_EXCEPTION = 'No Access exception';
+    public static final String QUERY_EXCEPTION = 'Query exception';
+    public static final String TYPE_EXCEPTION = 'Type exception';
+    public static final String EVENT_BUS_EXCEPTION = 'Event Bus Exception';
+
+    //Library
+    public static final String ADDEPAR_LIBRARY_NAME = 'Addepar';
+    public static final String ADDEPAR_ENTITY_TYPES_FILE = 'Entity Types';
+    public static final String ADDEPAR_ALL_ATTRIBUTES_FILE = 'All Attributes';
 
     //base url and extensions
     public static final String URL_BASE = String.valueOf(URL.getSalesforceBaseUrl());

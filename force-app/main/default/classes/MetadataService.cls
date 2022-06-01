@@ -1,4 +1,5 @@
 /**
+ * @group Open Source
  * Copyright (c), FinancialForce.com, inc
  * All rights reserved.
  *

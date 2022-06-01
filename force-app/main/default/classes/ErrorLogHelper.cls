@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date 01/01/2020
-* @group Helpers
+* @group Logging
 * @description helper class for ErrorLog__c handling
 */
 public with sharing class ErrorLogHelper {

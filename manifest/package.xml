@@ -2,10 +2,12 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>AccessControls</members>
-        <members>ContentDocumentHelper</members>
         <members>DeleteErrorLogBatch</members>
         <members>DeleteErrorLogScheduled</members>
         <members>DeleteErrorLogScheduledTest</members>
+        <members>DocumentHelper</members>
+        <members>DocumentLinker</members>
+        <members>DocumentWriter</members>
         <members>ErrorLogAfterDeleteTriggerHandler</members>
         <members>ErrorLogAfterDeleteTriggerHandlerTest</members>
         <members>ErrorLogAfterInsertTriggerHandler</members>
@@ -23,6 +25,7 @@
         <members>EventParameters</members>
         <members>GlobalDMLHandler</members>
         <members>GlobalDMLHandlerTest</members>
+        <members>HttpPost</members>
         <members>ITriggerDispatcher</members>
         <members>ITriggerHandler</members>
         <members>LoggingHandler</members>
@@ -34,6 +37,8 @@
         <members>MetadataService</members>
         <members>MetadataServicePatcher</members>
         <members>MetadataServiceTest</members>
+        <members>ObjectFieldTree</members>
+        <members>OrganizationObjectTree</members>
         <members>SObjectUtility</members>
         <members>StaticResources</members>
         <members>SystemInfo</members>

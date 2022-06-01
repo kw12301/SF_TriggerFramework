@@ -3,7 +3,7 @@
     <fullName>Username__c</fullName>
     <description>The username to access this endpoint</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>The username to access this endpoint</inlineHelpText>
     <label>Username</label>
     <length>255</length>

@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date 12/31/2019
-* @group Framework
+* @group Metadata Tooling
 * @description contains methods to deploy Custom Metadata Records for package
 */
 public with sharing class MetadataManager implements Metadata.DeployCallback {

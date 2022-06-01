@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Handlers
+* @group Trigger Handlers
 * @description before update trigger handler for object 
 */
 public with sharing class ErrorLogBeforeUpdateTriggerHandler extends TriggerHandlerBase {

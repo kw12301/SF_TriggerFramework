@@ -1,0 +1,1 @@
+GlobalDMLHandler.insertObject(new Account(Name = null));

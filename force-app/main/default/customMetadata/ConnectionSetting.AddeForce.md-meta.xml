@@ -16,7 +16,11 @@
     </values>
     <values>
         <field>BaseURL__c</field>
-        <value xsi:type="xsd:string">https://addepar.com/api/</value>
+        <value xsi:type="xsd:string">https://advisorpeak.clientdev.addepar.com/api/</value>
+    </values>
+    <values>
+        <field>FirmDomain__c</field>
+        <value xsi:type="xsd:string">advisorpeak.clientdev</value>
     </values>
     <values>
         <field>FirmId__c</field>

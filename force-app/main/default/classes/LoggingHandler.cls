@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Framework
+* @group Logging
 * @description contains methods to process exceptions
 */
 public with sharing class LoggingHandler {
@@ -72,12 +72,6 @@ public with sharing class LoggingHandler {
     public static void popEntry() {
         if(logLevel > 0) {
             logLevel--;
-        } else {
-            ErrorLog__c l = new ErrorLog__c();
-            l.ErrorStackTrace__c = retrieveExceptionLog();
-            l.ErrorType__c = StaticResources.INTEGRATION_EXCEPTION;
-            l.ErrorSubtype__c = 'Callout';
-            errorLogs.add(l);
         }
         removeStackTraceEntry();
     }
@@ -138,17 +132,7 @@ public with sharing class LoggingHandler {
         }
         exceptionTrace += EXCEPTION_TRACE_SUFFIX;
         saveError(errorType, objectName,ex);
-        if(!errorLogs.isEmpty()) {
-            List<ErrorLog__c> deduped = new List<ErrorLog__c>();
-            Set<String> types = new Set<String>();
-            for(ErrorLog__c l : errorLogs) {
-                if(!types.contains(l.ErrorType__c) && null != l.StackTraceString__c ) {
-                    deduped.add(l);
-                    types.add(l.ErrorType__c);
-                }
-            }
-            GlobalDMLHandler.insertObjectList(deduped);
-        }
+        popAll();
     }
     
     /**
@@ -167,17 +151,7 @@ public with sharing class LoggingHandler {
         }
         exceptionTrace += EXCEPTION_TRACE_SUFFIX;
         saveError(errorType, null, ex);
-        if(!errorLogs.isEmpty()) {
-            List<ErrorLog__c> deduped = new List<ErrorLog__c>();
-            Set<String> types = new Set<String>();
-            for(ErrorLog__c l : errorLogs) {
-                if(null == l.Id && !types.contains(l.ErrorType__c) && null != l.StackTraceString__c ) {
-                    deduped.add(l);
-                    types.add(l.ErrorType__c);
-                }
-            }
-            GlobalDMLHandler.insertObjectList(deduped);
-        }
+        popAll();
     }
     
     /**
@@ -295,7 +269,6 @@ public with sharing class LoggingHandler {
     }
 
     /**
-    * @author Kevin Winn
     * @description Processes Database.UpsertResults[]
     * @param List<Database.UpsertResult> a list of Database.UpsertResult records
     * @param String the Sobject API Name that DML was performed on
@@ -364,6 +337,17 @@ public with sharing class LoggingHandler {
         upsert errorLogs;
     }
 
+    /**
+    * @description private helper to construct an ErrorLog__c record
+    * @param String the status code for the error
+    * @param String the message for the error
+    * @param String[] the fields that caused the error
+    * @param String the username for the current context
+    * @param Id the Id for the running user
+    * @param String the Id for the record that incurred the error
+    * @param String the SObjectType name in string format
+    * @return Type: ErrorLog__c
+    */
     private static ErrorLog__c prepareErrorLog(String statusCode, String message, String[] fields,String userName,Id userId,String recId,String objectName) {
         ErrorLog__c log = new ErrorLog__c();
         log.Cause__c = statusCode;

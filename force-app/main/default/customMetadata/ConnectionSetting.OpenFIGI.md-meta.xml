@@ -19,6 +19,10 @@
         <value xsi:type="xsd:string">https://api.openfigi.com</value>
     </values>
     <values>
+        <field>FirmDomain__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>FirmId__c</field>
         <value xsi:nil="true"/>
     </values>

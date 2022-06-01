@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Framework
+* @group Trigger Framework
 * @description This class implements the ITriggerDispatcher and acts as an adapter to avoid implementing all the 
 *               ITriggerDispatcher methods.
 */

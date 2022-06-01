@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Framework
+* @group Trigger Framework
 * @description This factory creates the correct dispatcher and dispatches the trigger event(s) to the appropriate 
 *               event handler(s). The dispatchers are automatically created using the Type API, hence dispatcher 
 *               registration is not required for each dispatchers.
@@ -63,17 +63,16 @@ public with sharing class TriggerFactory {
     private static ITriggerDispatcher getTriggerDispatcher(Schema.sObjectType soType) {
         String originalTypeName = soType.getDescribe().getName();
         String dispatcherTypeName = null;
+        originalTypeName = null != MetadataQuery.NAMESPACE ? originalTypeName.substringAfter(MetadataQuery.NAMESPACE): originalTypeName;
+        originalTypeName = originalTypeName.indexOf(StaticResources.FSC_NAMESPACE) != -1 ? originalTypeName.substringAfter(StaticResources.FSC_NAMESPACE) : originalTypeName;
+        originalTypeName = originalTypeName.indexOf(StaticResources.SCHWAB_GATEWAY_NAMESPACE) != -1 ? originalTypeName.substringAfter(StaticResources.SCHWAB_GATEWAY_NAMESPACE) : originalTypeName;
+        originalTypeName = originalTypeName.indexOf(StaticResources.ADDEPAR_V2_NAMESPACE) != -1 ? originalTypeName.substringAfter(StaticResources.ADDEPAR_V2_NAMESPACE) : originalTypeName;
         if (originalTypeName.toLowerCase().endsWith('__c')) {
-            originalTypeName = null != MetadataQuery.NAMESPACE ? originalTypeName.substringAfter(MetadataQuery.NAMESPACE): originalTypeName;
-            originalTypeName = originalTypeName.indexOf(StaticResources.FSC_NAMESPACE) != -1 ? originalTypeName.substringAfter(StaticResources.FSC_NAMESPACE) : originalTypeName;
-            originalTypeName = originalTypeName.indexOf(StaticResources.SCHWAB_GATEWAY_NAMESPACE) != -1 ? originalTypeName.substringAfter(StaticResources.SCHWAB_GATEWAY_NAMESPACE) : originalTypeName;
-            originalTypeName = originalTypeName.indexOf(StaticResources.ADDEPAR_V2_NAMESPACE) != -1 ? originalTypeName.substringAfter(StaticResources.ADDEPAR_V2_NAMESPACE) : originalTypeName;
             originalTypeName = originalTypeName.substringBefore('__c');
-            dispatcherTypeName = originalTypeName + 'TriggerDispatcher';
-        } else {
-            //originalTypeName = null != MetadataQuery.NAMESPACE ? originalTypeName.substringAfter(MetadataQuery.NAMESPACE): originalTypeName;
-            dispatcherTypeName = originalTypeName + 'TriggerDispatcher';
+        } else if(originalTypeName.toLowerCase().endsWith('__e')){
+            originalTypeName = originalTypeName.substringBefore('__e');
         }
+        dispatcherTypeName = originalTypeName + 'TriggerDispatcher';
         Type obType = Type.forName(dispatcherTypeName);
         ITriggerDispatcher dispatcher = (obType == null) ? null : (ITriggerDispatcher)obType.newInstance();
         return dispatcher;

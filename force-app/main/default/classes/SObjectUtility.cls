@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date 04/11/2022
-* @group Framework
+* @group Utilities
 * @description Utilities for SObject manipulation and identification
 */
 public virtual class SObjectUtility {
@@ -10,15 +10,27 @@ public virtual class SObjectUtility {
     * @description Gets the type name of the SObject as a string.
     * @param SObject The SObject for which the name to be obtained.
     * @return Type: String
+    * @example SObjectUtility.getSObjectTypeName(new Account());
     */
     public static String getSObjectTypeName(SObject so) {
         return so.getSObjectType().getDescribe().getName();
     }
 
     /**
+    * @description Dynamically construct a new SObject based on the given name
+    * @param String the string name for the SObject to construct
+    * @return Type: SObject
+    * @example SObjectUtility.getSObjectForName('Account');
+    */
+    public static SObject getSObjectForName(String sobjectName) {
+        return Schema.getGlobalDescribe().get(sobjectName).newSobject();
+    }
+
+    /**
     * @description Gets the Schema.DescribeSObjectResult of the SObject.
     * @param SObject The SObject to describe.
     * @return Type: Schema.DescribeSObjectResult
+    * @example SObjectUtility.getSObjectDescribeResult(new Account());
     */
     public static Schema.DescribeSObjectResult getSObjectDescribeResult(SObject so) {
         return so.getSObjectType().getDescribe();
@@ -28,6 +40,7 @@ public virtual class SObjectUtility {
      *@description Validate string as acceptable for Salesforce Id.  Return null if invalid, otherwise valid Id as string
      *@param String the String value for the Id to validate
      *@return Type: String
+     @example SObjectUtility.validateId('xxxxxxxxxxxxxxxxxx');
     **/
     public static String validateId(String idParam) {
         String id = idParam == null ? '' : String.escapeSingleQuotes(idParam);
@@ -38,15 +51,14 @@ public virtual class SObjectUtility {
     }
 
     /**
-     *@description Method to mimic Select * functionality of SQL.  Builds string query to select all fields from given sobject name.
-     *              If the running user cannot access all fields on the given object, a query exception is thrown.
+     *@description Method to mimic Select * functionality of SQL.  Builds string query to select all createable fields from given sobject name.   
      *@param String The sobject name to select all fields from
      *@return Type: String
-     *@example Database.query(SObjectUtility.selectAllFields('Account'));
+     *@example Database.query(SObjectUtility.selectAllCreateableFields('Account'));
     **/
-    public static String selectAllFields(String sobjectName) 
+    public static String selectAllCreateableFields(String sobjectName) 
     {
-        String query = ('SELECT ' + String.join(new List<String>(Schema.getGlobalDescribe().get(sobjectName).getDescribe().fields.getMap().keySet()), ',') + ' FROM ' +sobjectName);
+        String query = ('SELECT ' + String.join(new List<String>(getCreatableFields(sobjectName)), ',') + ' FROM ' +sobjectName);
         return query;
     }
 
@@ -61,5 +73,28 @@ public virtual class SObjectUtility {
     public static String selectAllAddeparFields(String sobjectName,List<String> fieldList) {
         String query = ('Select ' + String.join(new List<String>(fieldList),',') + ' FROM ' + sobjectName);
         return query;
+    }
+
+    /**
+     * @description Method to get all Creatable fields for an SObject.  Used with SelectAllFields to ensure FLS is enforced
+     * @param String the string representation of the SObject name
+     * @return Type: Set<String> all creatable fields for the SObject
+     * @example SObjectUtility.getCreateableFields('Account');
+     */
+    public static Set<String> getCreatableFields(String sobjectName){
+        Set<String> results = new Set<String>();
+        SObject sobj = getSObjectForName(sobjectName);
+        AccessControls controls = AccessControls.getSObjectAccessControls(sobj);
+        if(controls.invalidRequest || !controls.sObjectAccess.isCreateable){
+            return results;
+        }else{
+            Map<String,Schema.SobjectField> fields = sobj.getSObjectType().getDescribe().fields.getMap();
+            for(String f : fields.keySet()){
+                if((f.toLowerCase() != 'name') && fields.get(f).getDescribe().isCreateable()){
+                    results.add(f.toLowerCase());
+                }
+            }
+            return results;
+        }
     }
 }

@@ -4,7 +4,7 @@
     <defaultValue>&quot;NA&quot;</defaultValue>
     <description>The API Version for this endpoint.  Leave as NA if no version is required in callout</description>
     <externalId>false</externalId>
-    <fieldManageability>DeveloperControlled</fieldManageability>
+    <fieldManageability>SubscriberControlled</fieldManageability>
     <inlineHelpText>The API Version for this endpoint.  Leave as NA if no version is required in callout</inlineHelpText>
     <label>API Version</label>
     <required>true</required>

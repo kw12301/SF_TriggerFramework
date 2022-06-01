@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date 12/31/2019
-* @group Framework
+* @group Org Framework
 * @description contains helper methods to identify system state, org information, and limit usage rates
 */
 public with sharing class SystemInfo {

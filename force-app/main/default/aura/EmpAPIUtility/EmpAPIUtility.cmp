@@ -1,0 +1,13 @@
+<aura:component implements="flexiPage:availableForAllPageTypes" access="Global">
+    <aura:attribute name="channel" type="String" default="/event/HttpResponse__e" />
+    <aura:attribute name="subscribe" type="Boolean" default="false" />
+    <aura:attribute name="subscription" type="Map" />
+    <aura:attribute name="message" type="Object" default="{}" access="Public" description="The message payload from the channel"/>
+    <aura:method name="subscribeToChannel" action="{!c.subscribe}" access="Public" description="Method to subscribe to a channel from another component">
+        <aura:attribute name="channelToSubscribe" type="String" default="{!v.channel}" description="The parameter for the channel to subscribe to"/>
+        <aura:attribute name="subscribed" type="Boolean" default="{!v.subscribe}" />
+    </aura:method>
+    <aura:method name="unsubscribeFromChannel" action="{!c.unsubscribe}" access="public" description="Method to unsubscribe from channel" />
+	<lightning:empApi aura:id="eventListenerAPI" />
+	<aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+</aura:component>	

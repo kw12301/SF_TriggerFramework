@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Handlers
+* @group Trigger Handlers
 * @description after insert trigger handler for object 
 */
 public with sharing class ErrorLogAfterInsertTriggerHandler extends TriggerHandlerBase {
@@ -11,6 +11,14 @@ public with sharing class ErrorLogAfterInsertTriggerHandler extends TriggerHandl
 	}
 
 	private void process(List<ErrorLog__c> newlist)	{
-		System.debug(LoggingLevel.INFO,'ErrorLogAfterInsertTriggerHandler fired');
+		List<ErrorLog__c> results = new List<ErrorLog__c>();
+		for(ErrorLog__c e : newList){
+			if(!e.Duplicate__c){
+				results.add(e);
+			}
+		}
+		if(!results.isEmpty()){
+			EventProcessing.publishErrorEvent(results);
+		}
 	}
 }

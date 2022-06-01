@@ -1,14 +1,14 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Batch
+* @group Maintenance
 * @description Delete error logs older than number of days specified in
 *  DaysPriorToDeleteErrors Custom Label.  If no label defined, defaults to 30
 **/
 public class DeleteErrorLogBatch implements Database.Batchable<sObject> {    
     public final String query;
     public final DateTime pastMonth;
-    public final DateTime testTime;
+    public final DateTime testTime = System.now().addMinutes(60);
 
     /**
     * @description Prepare query to get error logs older than the specified number of days
@@ -21,7 +21,7 @@ public class DeleteErrorLogBatch implements Database.Batchable<sObject> {
         else {
             pastMonth = System.now().addDays(-30);
         }
-        query = Test.isRunningTest() ? 'SELECT Id FROM ErrorLog__c WHERE CreatedDate < :testTime' : 'SELECT Id FROM ErrorLog__c WHERE CreatedDate < :pastMonth';
+        query = Test.isRunningTest() ? 'SELECT Id FROM ErrorLog__c WHERE CreatedDate < :testTime' : 'SELECT Id FROM ErrorLog__c WHERE CreatedDate < :pastMonth Or Duplicate__c = true';
     }
     
     /**
@@ -34,7 +34,7 @@ public class DeleteErrorLogBatch implements Database.Batchable<sObject> {
     /**
     * @description Delete all error logs older than the specified number of days
     */ 
-    public void execute(Database.BatchableContext bc, List<ErrorLog__c> scope) {
+    public void execute(Database.BatchableContext bc, List<ErrorLog__c> scope) {      
         GlobalDMLHandler.deleteObjectList(scope);
     }
     

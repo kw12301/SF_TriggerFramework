@@ -8,6 +8,7 @@
     <columns>ErrorType__c</columns>
     <columns>ErrorSubtype__c</columns>
     <columns>StackTraceString__c</columns>
+    <columns>Duplicate__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

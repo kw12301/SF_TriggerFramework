@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Framework
+* @group Metadata Tooling
 * @description Trading Metadata
 *               Contains methods to cache all expected fields from metadata settings to support integration.
 *               New fields added to future releases will need to be added to query methods in this class
@@ -13,35 +13,30 @@ public with sharing class MetadataQuery {
     * @return Type: String
     */
     public static final String NAMESPACE = StaticResources.ADDEPAR_V3_NAMESPACE;
-    
+  
     /**
-    * @description method to cache the System Default Qualified API Name for default settings
-    *               combine with NAMESPACE string and metadata object name to query default metadata settings 
-    * @return Type: String
-    */
-    public static final String SYSTEM_DEFAULT = 'Default';
-
-    /**
-    * @description method to cache the System Test Qualified API Name for test settings
-    *               combine with NAMESPACE string and metadata object name to query test metadata settings 
-    * @return Type: String
-    */
-    public static final String SYSTEM_TEST = 'SystemTest';
-
-    /**
-    * @description cache all AP field settings
+    * @description cache all Connection Settings
     * @return Type: ConnectionSetting__mdt[]
     */
-    public static ConnectionSetting__mdt[] connectionSettings() {
+    public static ConnectionSetting__mdt[] getConnectionSettings() {
         ConnectionSetting__mdt[] settings = Database.query(connectionSettingsQuery());
         return settings;
     }
 
     /**
-    * @description cache all AP field settings
+    * @description cache all Endpoint Settings
+    * @return Type: ConnectionSetting__mdt[]
+    */
+    public static EndpointSetting__mdt[] getEndpointSettings() {
+        EndpointSetting__mdt[] settings = Database.query(endpointSettingsQuery());
+        return settings;
+    }
+
+    /**
+    * @description cache all field settings
     * @return Type: TradingField__mdt[]
     */
-    public static TradingField__mdt[] tradingFields() {
+    public static TradingField__mdt[] getTradingFields() {
         TradingField__mdt[] settings = Database.query(tradingFieldsQuery());
         return settings;
     }
@@ -50,7 +45,7 @@ public with sharing class MetadataQuery {
     * @description cache all AP field settings
     * @return Type: TradingMap__mdt[]
     */
-    public static TradingMap__mdt[] tradingMaps() {
+    public static TradingMap__mdt[] getTradingMaps() {
         TradingMap__mdt[] settings = Database.query(tradingMapQuery());
         return settings;
     }
@@ -59,7 +54,7 @@ public with sharing class MetadataQuery {
     * @description cache all AP field settings
     * @return Type: TradingObject__mdt[]
     */
-    public static TradingObject__mdt[] tradingObjects() {
+    public static TradingObject__mdt[] getTradingObjects() {
         TradingObject__mdt[] settings = Database.query(tradingObjectsQuery());
         return settings;
     }
@@ -68,7 +63,7 @@ public with sharing class MetadataQuery {
     * @description cache all AP field settings
     * @return Type: TradingSchema__mdt[]
     */
-    public static TradingSchema__mdt[] tradingSchemas() {
+    public static TradingSchema__mdt[] getTradingSchemas() {
         TradingSchema__mdt[] settings = Database.query(tradingSchemaQuery());
         return settings;
     }
@@ -77,8 +72,8 @@ public with sharing class MetadataQuery {
     * @author Kevin Winn
     * @return Type: TradingSetting__mdt[]
     */
-    public static TradingSetting__mdt tradingSettings() {
-        TradingSetting__mdt settings = Database.query(tradingSettingsQuery());
+    public static List<TradingSetting__mdt> getTradingSettings() {
+        TradingSetting__mdt[] settings = Database.query(tradingSettingsQuery());
         return settings;
     }
 
@@ -103,9 +98,28 @@ public with sharing class MetadataQuery {
         		NAMESPACE + 'BaseURL__c,'+
         		NAMESPACE + 'FirmId__c,'+
         		NAMESPACE + 'Password__c,'+
+                NAMESPACE + 'FirmDomain__c,'+
                 NAMESPACE + 'Username__c From ConnectionSetting__mdt';  
         return base;
     }
+
+    /**
+    * @description prepare query string for Endpoint Settings metadata object
+    * @return Type: String
+    */
+    private static String endpointSettingsQuery() {
+        String base = standardMetaFieldsQuery();
+        base += NAMESPACE + 'ConnectionSetting__c,'+
+                NAMESPACE + 'HttpVerb__c,'+
+                NAMESPACE + 'ContentType__c,'+
+                NAMESPACE + 'ApiVersionVariable__c,'+
+                NAMESPACE + 'EndpointURL__c,'+
+                NAMESPACE + 'FirmUrlVariable__c,'+
+                NAMESPACE + 'ConnectionSetting__r.QualifiedAPIName From EndpointSetting__mdt';  
+        return base;
+    }
+
+
 
     /**
     * @description prepare query string for Trading Fields metadata object

@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date 2022
-* @group Framework
+* @group Org Framework
 * @description This class provides a method to generate a custom apex object that groups this organizations SObjects into the following categories:
 *       Standard Objects:  A wrapper class containing all standard Salesforce SObjects in this org.
 *       Custom Objects: A wrapper class containing all custom objects created by this org.
@@ -87,12 +87,17 @@ public with sharing class OrganizationObjectTree {
 
     /**
      *@description public wrapper for defining a Standard SObject in this org.
-     *@return Type: StandardObject
     **/
     public class StandardObject {
         public String apiName;
         public String label;
         public Schema.SObjectType sObjType;
+
+        /**
+         * @description Constructor for class
+         * @param String the api name for the SObject
+         * @param Schema.SObjectType The SObjectType for the SObject
+         */
         public StandardObject(String key, Schema.SObjectType sobjType){
             this.apiName = key;
             this.label = sobjType.getDescribe().getLabel();
@@ -102,12 +107,17 @@ public with sharing class OrganizationObjectTree {
 
     /**
      *@description public wrapper for defining a Custom SObject specific to this org.
-     *@return Type: CustomObject
     **/
     public class CustomObject {
         public String apiName;
         public String label;
         public Schema.SObjectType sObjType;
+
+        /**
+         * @description Constructor for class
+         * @param String the api name for the SObject
+         * @param Schema.SObjectType The SObjectType for the SObject
+         */
         public CustomObject(String key, Schema.SObjectType sobjType) {
             this.apiName = key;
             this.label = sobjType.getDescribe().getLabel();
@@ -118,13 +128,19 @@ public with sharing class OrganizationObjectTree {
     /**
      *@description public wrapper for defining a Namespaced SObject specific to this org.
      *              namespaced objects are created by package installs from the AppExchange
-     *@return Type: NameSpacedObject
     **/
     public class NamespacedObject {
         public String apiName;
         public String label;
         public String namespace;
         public Schema.SObjectType sObjType;
+
+        /**
+         * @description Constructor for class
+         * @param String the api name for the SObject
+         * @param Schema.SObjectType The SObjectType for the SObject
+         * @param String the namespace for the SObject
+         */
         public NamespacedObject(String key, Schema.SObjectType sobjType,String namespace){
             this.apiName = key;
             this.label = sobjType.getDescribe().getLabel();
@@ -135,12 +151,17 @@ public with sharing class OrganizationObjectTree {
 
     /**
      *@description public wrapper for defining all org specific CustomSetting Sobjects deployed in this org.
-     *@return Type: CustomSetting
     **/
     public class CustomSetting {
         public String apiName;
         public String label;
         public Schema.SObjectType sObjType;
+
+        /**
+         * @description Constructor for class
+         * @param String the api name for the SObject
+         * @param Schema.SObjectType The SObjectType for the custom setting SObject
+         */
         public CustomSetting(String key, Schema.SObjectType sobjType){
             this.apiName = key;
             this.label = sobjType.getDescribe().getLabel();
@@ -150,13 +171,19 @@ public with sharing class OrganizationObjectTree {
 
      /**
      *@description public wrapper for defining all namespaced CustomSetting Sobjects deployed in this org.
-     *@return Type: CustomSetting
     **/
     public class NamespacedCustomSetting {
         public String apiName;
         public String label;
         public String namespace;
         public Schema.SObjectType sObjType;
+
+        /**
+         * @description Constructor for class
+         * @param String the api name for the SObject
+         * @param Schema.SObjectType The SObjectType for the SObject
+         * @param String the namespace for the custom setting SObject
+         */
         public NamespacedCustomSetting(String key, Schema.SObjectType sobjType,String namespace){
             this.apiName = key;
             this.label = sobjType.getDescribe().getLabel();

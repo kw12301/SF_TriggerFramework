@@ -1,0 +1,10 @@
+<aura:component implements="lightning:backgroundUtilityItem" access="Global">
+	<aura:attribute name="channel" type="String" default="/event/ErrorEvent__e" access="public"/>
+	<aura:attribute name="subscribe" type="Boolean" default="true" access="public"/>
+	<aura:attribute name="subscription" type="Map" access="public"/>
+    <aura:attribute name="message" type="Object" default="{}" access="public"/>
+	<aura:registerEvent name="toastEvent" type="force:showToast" />
+	<aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    <aura:handler name="change" value="{!v.message}" action="{!c.fireMessage}"/>
+	    <c:EmpAPIUtility channel="{!v.channel}" subscribe="{!v.subscribe}" message="{!v.message}" aura:id="errorEventListener"/>
+</aura:component>

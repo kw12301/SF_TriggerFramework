@@ -31,6 +31,7 @@ public with sharing class DeleteErrorLogScheduledTest{
             insert a;
         } catch (Exception e) {
             LoggingHandler.debugException(e, StaticResources.SALESFORCE_EXCEPTION, 'Account');
+            LoggingHandler.popAll();
         }
         
         Integer errors = [SELECT count() FROM ErrorLog__c];
@@ -44,12 +45,18 @@ public with sharing class DeleteErrorLogScheduledTest{
     static void batchDeleteErrorLogStandardUser() {  
         User usr = TestDataFactory.createStandardUser();
         System.runAs(usr) {
-            LoggingHandler.debug('Test String', 'Test Error', 'Test Object',null);
+            Account a = new Account();
+            try {
+                insert a;
+            } catch (Exception e) {
+                LoggingHandler.debugException(e, StaticResources.SALESFORCE_EXCEPTION, 'Account');
+                LoggingHandler.popAll();
+            }
             Test.startTest();
             Database.executeBatch(new DeleteErrorLogBatch()); 
             Test.stopTest();
             Integer errors = [Select count() from ErrorLog__c];
-            System.assertEquals(errors, 0,'Errors not zero');
+            System.assertEquals(0, errors,'Errors not zero');
         }
     }
 
@@ -60,12 +67,18 @@ public with sharing class DeleteErrorLogScheduledTest{
     static void batchDeleteErrorLogAdminUser()  {  
         User usr = TestDataFactory.createAdminUser();
         System.runAs(usr) {
-            LoggingHandler.debug('Test String', 'Test Error', 'Test Object',null);
+            Account a = new Account();
+            try {
+                insert a;
+            } catch (Exception e) {
+                LoggingHandler.debugException(e, StaticResources.SALESFORCE_EXCEPTION, 'Account');
+                LoggingHandler.popAll();
+            }
             Test.startTest();
             Database.executeBatch(new DeleteErrorLogBatch()); 
             Test.stopTest();
             Integer errors = [Select count() from ErrorLog__c];
-            System.assertEquals(errors, 0,'errors not zero');
+            System.assertEquals(0, errors,'errors not zero');
         }
     }
 }

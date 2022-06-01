@@ -1,7 +1,7 @@
 /**
 * @author Kevin Winn
 * @date May 17, 2022
-* @group Framework
+* @group Trigger Framework
 * @description This class holds the trigger parameters.
 */
 public class TriggerParameters {
@@ -39,13 +39,21 @@ public class TriggerParameters {
         this.oldMap = omap;
         this.newMap = nmap;
         this.triggerObject = SObjectUtility.getSObjectTypeName((this.oldList != null && this.oldList.size() > 0) ? this.oldList[0] : this.newList[0]);
-        if (ib & ii) tEvent = TriggerEvent.beforeInsert;
-        else if (ib && iu) tEvent = TriggerEvent.beforeUpdate;
-        else if (ib && id) tEvent = TriggerEvent.beforeDelete;
-        else if (ia && ii) tEvent = TriggerEvent.afterInsert;
-        else if (ia && iu) tEvent = TriggerEvent.afterUpdate;
-        else if (ia && id) tEvent = TriggerEvent.afterDelete;
-        else if (ia && iud) tEvent = TriggerEvent.afterUndelete;
+        if (ib & ii){
+            tEvent = TriggerEvent.beforeInsert;
+        } else if(ib && iu){
+            tEvent = TriggerEvent.beforeUpdate;
+        } else if (ib && id) {
+            tEvent = TriggerEvent.beforeDelete;
+        } else if (ia && ii) {
+            tEvent = TriggerEvent.afterInsert;
+        } else if (ia && iu) {
+            tEvent = TriggerEvent.afterUpdate;
+        } else if (ia && id) {
+            tEvent = TriggerEvent.afterDelete;
+        } else if (ia && iud) {
+            tEvent = TriggerEvent.afterUndelete;
+        }
         isExecuting = ie;
     }
 }
