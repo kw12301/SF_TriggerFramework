@@ -25,10 +25,19 @@ public with sharing class MetadataQuery {
 
     /**
     * @description cache all Endpoint Settings
-    * @return Type: ConnectionSetting__mdt[]
+    * @return Type: EndpointSetting__mdt[]
     */
     public static EndpointSetting__mdt[] getEndpointSettings() {
         EndpointSetting__mdt[] settings = Database.query(endpointSettingsQuery());
+        return settings;
+    }
+
+    /**
+    * @description cache all Endpoint Settings
+    * @return Type: Persona__mdt[]
+    */
+    public static Persona__mdt[] getPersonas() {
+        Persona__mdt[] settings = Database.query(personasQuery());
         return settings;
     }
 
@@ -116,6 +125,21 @@ public with sharing class MetadataQuery {
                 NAMESPACE + 'EndpointURL__c,'+
                 NAMESPACE + 'FirmUrlVariable__c,'+
                 NAMESPACE + 'ConnectionSetting__r.QualifiedAPIName From EndpointSetting__mdt';  
+        return base;
+    }
+
+    /**
+    * @description prepare query string for Endpoint Settings metadata object
+    * @return Type: String
+    */
+    private static String personasQuery() {
+        String base = standardMetaFieldsQuery();
+        base += NAMESPACE + StaticResources.IS_ACTIVE_FIELD +','+
+                NAMESPACE + StaticResources.IS_TEST_DATA +','+
+                NAMESPACE + StaticResources.INLINE_HELP_TEXT+','+
+                NAMESPACE + StaticResources.ICON_URL+','+
+                NAMESPACE + StaticResources.CARD_BODY+','+
+                NAMESPACE + StaticResources.NODE+ ' From Persona__mdt Order By QualifiedAPIName ASC';  
         return base;
     }
 

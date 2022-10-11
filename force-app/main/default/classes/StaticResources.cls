@@ -21,6 +21,9 @@ public with sharing class StaticResources {
     public static final String INLINE_HELP_TEXT = 'InlineHelpText__c';
     public static final String HELP_LINK = 'HelpLink__c';
     public static final String IS_ACTIVE_FIELD = 'IsActive__c';
+    public static final String CARD_BODY = 'CardBody__c';
+    public static final String ICON_URL = 'IconUrl__c';
+    public static final String NODE = 'Node__c';
     public static final String CONNECTION_OBJECT = 'ConnectionSettings.';
     public static final String SYSTEM_DEFAULT = 'Default';
     public static final String SYSTEM_TEST = 'SystemTest';
@@ -61,6 +64,7 @@ public with sharing class StaticResources {
     public static final String ADDEPAR_LIBRARY_NAME = 'Addepar';
     public static final String ADDEPAR_ENTITY_TYPES_FILE = 'Entity Types';
     public static final String ADDEPAR_ALL_ATTRIBUTES_FILE = 'All Attributes';
+    public static final String ADDEPAR_ALL_ARGUMENTS_FILE = 'All Arguments';
 
     //base url and extensions
     public static final String URL_BASE = String.valueOf(URL.getSalesforceBaseUrl());

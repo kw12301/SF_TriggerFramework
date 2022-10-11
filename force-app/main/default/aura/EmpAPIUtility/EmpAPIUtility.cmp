@@ -10,4 +10,4 @@
     <aura:method name="unsubscribeFromChannel" action="{!c.unsubscribe}" access="public" description="Method to unsubscribe from channel" />
 	<lightning:empApi aura:id="eventListenerAPI" />
 	<aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
-</aura:component>	
+</aura:component>

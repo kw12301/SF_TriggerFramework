@@ -22,6 +22,7 @@ public with sharing class DocumentWriter {
      * @example ContentDocumentHelper.upsertContentVersion('My Doc Title',Blob.valueOf(JSON.serializePretty(new Account())),DocumentWriter.FileType.PDF);
      */
 	public static Id upsertContentVersion(String documentTitle,Blob contentBody,DocumentWriter.FileType fileType) {
+        System.debug(LoggingLevel.INFO,'CPU begin upsertContentVersion() ' + Limits.getCpuTime()); 
         AccessControls controls = AccessControls.getSObjectAccessControls(SObjectUtility.getSobjectForName('ContentVersion'));
         Id versionId;
         if(!DocumentHelper.fileSizeCheck(Long.valueOf(String.valueOf(contentBody.size())))){
@@ -38,6 +39,7 @@ public with sharing class DocumentWriter {
                 versionId = handleExistingVersion(version,contentBody,fileType);
             }
         }
+        System.debug(LoggingLevel.INFO,'CPU end upsertContentVersion() ' + Limits.getCpuTime()); 
         return versionId;
     }
 

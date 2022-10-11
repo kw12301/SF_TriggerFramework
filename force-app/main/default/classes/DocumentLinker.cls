@@ -13,6 +13,7 @@ public with sharing class DocumentLinker {
      * @param LinkedEntityId The Id for the SObject record to create a ContentDocumentLink for the ContentVersion
      */
     public static void manageContentDocumentLink(Id versionId,Id linkedEntityId) {
+        System.debug(LoggingLevel.INFO,'CPU begin manageContentDocumentLink() ' + Limits.getCpuTime()); 
         AccessControls controls = AccessControls.getSObjectAccessControls(SObjectUtility.getSObjectForName('ContentDocumentLink'));
         if(null == SObjectUtility.validateId(versionId) || null == SObjectUtility.validateId(linkedEntityId)){
             LoggingHandler.debugException(new DocumentLinkerException('Invalid Id'), StaticResources.SALESFORCE_EXCEPTION, 'ContentDocumentLink');
@@ -30,6 +31,7 @@ public with sharing class DocumentLinker {
                 GlobalDMLHandler.insertObject(cdl);
             }
         }
+        System.debug(LoggingLevel.INFO,'CPU end manageContentDocumentLink() ' + Limits.getCpuTime()); 
     }
 
     /**
