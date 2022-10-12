@@ -1,13 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>APIProcessing</members>
+        <members>APIRequestHandler</members>
+        <members>APIResponseHandler</members>
         <members>AccessControls</members>
+        <members>AddeparLibraryHandler</members>
+        <members>Arguments</members>
+        <members>Attributes</members>
+        <members>ConsumeObject</members>
+        <members>Data</members>
         <members>DeleteErrorLogBatch</members>
         <members>DeleteErrorLogScheduled</members>
         <members>DeleteErrorLogScheduledTest</members>
         <members>DocumentHelper</members>
         <members>DocumentLinker</members>
         <members>DocumentWriter</members>
+        <members>EndpointBuilder</members>
+        <members>EndpointSettings</members>
+        <members>EntityAttribute</members>
+        <members>EntityType</members>
         <members>ErrorLogAfterDeleteTriggerHandler</members>
         <members>ErrorLogAfterDeleteTriggerHandlerTest</members>
         <members>ErrorLogAfterInsertTriggerHandler</members>
@@ -23,11 +35,19 @@
         <members>ErrorLogHelper</members>
         <members>ErrorLogTriggerDispatcher</members>
         <members>EventParameters</members>
+        <members>EventProcessing</members>
         <members>GlobalDMLHandler</members>
         <members>GlobalDMLHandlerTest</members>
+        <members>HttpDelete</members>
+        <members>HttpGet</members>
+        <members>HttpHeaders</members>
+        <members>HttpPatch</members>
         <members>HttpPost</members>
+        <members>HttpPut</members>
+        <members>HttpResponseAfterInsertTriggerHandler</members>
         <members>ITriggerDispatcher</members>
         <members>ITriggerHandler</members>
+        <members>Links</members>
         <members>LoggingHandler</members>
         <members>LoggingHandlerTest</members>
         <members>MetadataHelper</members>
@@ -37,10 +57,16 @@
         <members>MetadataService</members>
         <members>MetadataServicePatcher</members>
         <members>MetadataServiceTest</members>
+        <members>NextLink</members>
         <members>ObjectFieldTree</members>
         <members>OrganizationObjectTree</members>
+        <members>ParseAllArguments</members>
+        <members>ParseAllAttributes</members>
+        <members>ParseEntityTypes</members>
+        <members>Relationships</members>
         <members>SObjectUtility</members>
         <members>StaticResources</members>
+        <members>StringUtils</members>
         <members>SystemInfo</members>
         <members>SystemInfoTest</members>
         <members>TestDataFactory</members>
@@ -49,22 +75,31 @@
         <members>TriggerFactory</members>
         <members>TriggerHandlerBase</members>
         <members>TriggerParameters</members>
+        <members>Values</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexTestSuite</name>
-    </types>
-    <types>
         <members>ErrorLogTrigger</members>
+        <members>HttpResponseTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Administrator</members>
+        <members>ApiMonitorUtility</members>
+        <members>ChartEvent</members>
+        <members>EmpAPIUtility</members>
+        <members>ErrorMonitorUtility</members>
+        <members>MedalsByCountry</members>
+        <members>MedalsByType</members>
+        <members>MedalsTimeline</members>
+        <members>PersonasApp</members>
+        <members>RealTimeChart</members>
+        <members>UtilityBar</members>
+        <members>defaultTokens</members>
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Addepar</members>
         <name>CspTrustedSite</name>
     </types>
     <types>
@@ -72,6 +107,7 @@
         <members>ConnectionSetting__mdt.APISecret__c</members>
         <members>ConnectionSetting__mdt.APIVersion__c</members>
         <members>ConnectionSetting__mdt.BaseURL__c</members>
+        <members>ConnectionSetting__mdt.FirmDomain__c</members>
         <members>ConnectionSetting__mdt.FirmId__c</members>
         <members>ConnectionSetting__mdt.Password__c</members>
         <members>ConnectionSetting__mdt.Username__c</members>
@@ -185,12 +221,12 @@
         <name>CustomMetadata</name>
     </types>
     <types>
-        <members>ErrorLog__c</members>
         <members>ConnectionSetting__mdt</members>
+        <members>ErrorLog__c</members>
         <members>SierraEvent__e</members>
         <members>TradingField__mdt</members>
-        <members>TradingObject__mdt</members>
         <members>TradingMap__mdt</members>
+        <members>TradingObject__mdt</members>
         <members>TradingSchema__mdt</members>
         <members>TradingSetting__mdt</members>
         <name>CustomObject</name>
@@ -222,7 +258,7 @@
         <name>ListView</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Trading_Admin</members>
         <name>PermissionSet</name>
     </types>
     <types>
@@ -231,8 +267,8 @@
         <name>Profile</name>
     </types>
     <types>
-        <members>AddeparId</members>
         <members>AddeparAPI</members>
+        <members>AddeparId</members>
         <members>AddeparPbo</members>
         <name>RemoteSiteSetting</name>
     </types>
@@ -246,5 +282,9 @@
         <members>TradingSchema__mdt.Max_Number_Length</members>
         <name>ValidationRule</name>
     </types>
-    <version>54.0</version>
+    <types>
+        <members>ErrorLog__c.Object_Info</members>
+        <name>WebLink</name>
+    </types>
+    <version>53.0</version>
 </Package>
