@@ -88,7 +88,7 @@ public virtual class SObjectUtility {
     List<String> fieldList
   ) {
     String query = ('Select ' +
-    String.join(new List<String>(StringUtils.secureString(fieldList)), ',') +
+    String.join(new List<String>(fieldList), ',') +
     ' FROM ' +
     StringUtils.secureString(sobjectName));
     return query;

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>GET All Arguments</label>
+    <protected>true</protected>
+    <values>
+        <field>ApiVersionVariable__c</field>
+        <value xsi:type="xsd:string">API_VERSION</value>
+    </values>
+    <values>
+        <field>ConnectionSetting__c</field>
+        <value xsi:type="xsd:string">AddeForce</value>
+    </values>
+    <values>
+        <field>ContentType__c</field>
+        <value xsi:type="xsd:string">NOT_REQUIRED</value>
+    </values>
+    <values>
+        <field>EndpointURL__c</field>
+        <value xsi:type="xsd:string">https://FIRM_URL.addepar.com/api/API_VERSION/arguments</value>
+    </values>
+    <values>
+        <field>FirmUrlVariable__c</field>
+        <value xsi:type="xsd:string">FIRM_URL</value>
+    </values>
+    <values>
+        <field>HTTPVerb__c</field>
+        <value xsi:type="xsd:string">GET</value>
+    </values>
+</CustomMetadata>

@@ -46,6 +46,23 @@ public with sharing class APIProcessing {
         }
     }
 
+    /**
+    *@description execute callout to GET all arguments
+     */
+    public void getAllArgumentsForOrg(){
+        if(!requestState().containsKey(true)){
+            LogException(requestState().get(false),'Arguments');
+        }else{
+            EndpointSetting__mdt settings = dictionary.get('GET_All_Arguments');
+            String endpoint = new EndpointBuilder(settings).endpoint;
+            if(!SystemInfo.isAsync()){
+                APIRequestHandler.makeFutureCall(settings.QualifiedAPIName, null, endpoint, settings.HttpVerb__c, 'Arguments');
+            } else{
+                APIRequestHandler.makeNormalCall(settings.QualifiedAPIName, null, endpoint, settings.HttpVerb__c, 'Arguments');
+            }
+        }
+    }
+
     private void LogException(APIProcessingException ex,String objectName){
         LoggingHandler.debugException(ex, StaticResources.SALESFORCE_EXCEPTION, objectName);
         LoggingHandler.popAll();

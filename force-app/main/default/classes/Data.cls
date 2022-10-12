@@ -36,6 +36,7 @@ public with sharing class Data {
 	 * @param JSONParser the parser to use to create an instance of this class
 	 */
 	public Data(JSONParser parser) {
+		System.debug(LoggingLevel.INFO,'CPU begin handle data ' + Limits.getCpuTime());
 		while (parser.nextToken() != System.JSONToken.END_OBJECT) {
 			if (parser.getCurrentToken() == System.JSONToken.FIELD_NAME) {
 				String text = parser.getText();
@@ -56,6 +57,7 @@ public with sharing class Data {
 				}
 			}
 		}
+		System.debug(LoggingLevel.INFO,'CPU end handle data ' + Limits.getCpuTime());
 	}
 
 	/**

@@ -42,7 +42,9 @@ public with sharing class HttpGet extends APIRequestHandler {
     }
 
     private static void handleResponse(HttpResponse response,String epsQualifiedAPIName){
+        System.debug(LoggingLevel.INFO,'CPU begin handle response ' + Limits.getCpuTime());
         EventProcessing.publishHttpResponseEvent(response,epsQualifiedAPIName);
+        System.debug(LoggingLevel.INFO,'CPU publish event bus' + Limits.getCpuTime());
         if(response.getStatusCode() == 200){
             APIResponseHandler.routeResponse(response.getBody(),epsQualifiedAPIName);
         }else{

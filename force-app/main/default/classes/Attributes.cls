@@ -35,12 +35,28 @@ public with sharing class Attributes {
      * @description The usage for the attribute
      */
     public List<String> usage { get; set; }
+
+    /**
+     * @description The values for the attribute.  See Values.cls
+     */
+    public String valuesList { get; set; }
+
+    /**
+     * @description The default value for the attribute.  See Values.cls
+     */
+    public String defaultValue { get; set; }
+
+    /**
+     * @description The argument type.
+     */
+    public String argumentType { get; set; }
     
     /**
      * @description Constructor for class
      * @param JSONParser the json parser object to construct an instance of Attributes from
      */
     public Attributes(JSONParser parser){
+        System.debug(LoggingLevel.INFO,'CPU begin parsing attributes ' + Limits.getCpuTime());
         while(parser.nextToken() != System.JSONToken.END_OBJECT){
             if(parser.getCurrentToken() == System.JSONToken.FIELD_NAME){
                 String text = parser.getText();
@@ -57,12 +73,19 @@ public with sharing class Attributes {
                         this.outputType = parser.getText();
                     } else if(text == 'usage'){
                         this.usage = usageList(parser);
+                    } else if(text == 'values'){
+                        this.valuesList = String.valueOf(parser.nextToken()); //TO DO: Figure out how to parse this mess
+                    } else if(text == 'default_value'){
+                        this.defaultValue = String.valueOf(parser.getText());
+                    } else if(text == 'arg_type'){
+                        this.argumentType = parser.getText();
                     } else{
                         ConsumeObject.destroy(parser);
                     }
                 }
             }
         }
+        System.debug(LoggingLevel.INFO,'CPU end parsing attributes ' + Limits.getCpuTime());
     }
 
     /**

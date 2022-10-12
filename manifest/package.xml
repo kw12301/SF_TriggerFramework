@@ -111,6 +111,17 @@
         <members>ConnectionSetting__mdt.FirmId__c</members>
         <members>ConnectionSetting__mdt.Password__c</members>
         <members>ConnectionSetting__mdt.Username__c</members>
+        <members>EndpointSetting__mdt.ApiVersionVariable__c</members>
+        <members>EndpointSetting__mdt.ConnectionSetting__c</members>
+        <members>EndpointSetting__mdt.ContentType__c</members>
+        <members>EndpointSetting__mdt.EndpointURL__c</members>
+        <members>EndpointSetting__mdt.FirmUrlVariable__c</members>
+        <members>EndpointSetting__mdt.HTTPVerb__c</members>
+        <members>ErrorEvent__e.Category__c</members>
+        <members>ErrorEvent__e.Id__c</members>
+        <members>ErrorEvent__e.Message__c</members>
+        <members>ErrorEvent__e.TotalErrors__c</members>
+        <members>ErrorEvent__e.Type__c</members>
         <members>ErrorLog__c.Cause__c</members>
         <members>ErrorLog__c.DMLFieldNames__c</members>
         <members>ErrorLog__c.DMLFields__c</members>
@@ -128,6 +139,17 @@
         <members>ErrorLog__c.Message__c</members>
         <members>ErrorLog__c.Object__c</members>
         <members>ErrorLog__c.StackTraceString__c</members>
+        <members>HttpResponse__e.EndpointSetting__c</members>
+        <members>HttpResponse__e.IsSuccess__c</members>
+        <members>HttpResponse__e.StatusCode__c</members>
+        <members>HttpResponse__e.Status__c</members>
+        <members>Persona__mdt.CardBody__c</members>
+        <members>Persona__mdt.HelpLink__c</members>
+        <members>Persona__mdt.IconUrl__c</members>
+        <members>Persona__mdt.InlineHelpText__c</members>
+        <members>Persona__mdt.IsActive__c</members>
+        <members>Persona__mdt.IsTestData__c</members>
+        <members>Persona__mdt.Node__c</members>
         <members>SierraEvent__e.ExternalId__c</members>
         <members>SierraEvent__e.PlatformEvent__c</members>
         <members>SierraEvent__e.SObjectApiName__c</members>
@@ -161,6 +183,17 @@
     <types>
         <members>ConnectionSetting.AddeForce</members>
         <members>ConnectionSetting.OpenFIGI</members>
+        <members>EndpointSetting.GET_All_Arguments</members>
+        <members>EndpointSetting.GET_All_Attributes</members>
+        <members>EndpointSetting.GET_All_Entity_Types</members>
+        <members>Persona.Administration</members>
+        <members>Persona.Advisor</members>
+        <members>Persona.Analyst</members>
+        <members>Persona.Client_Services</members>
+        <members>Persona.Compliance</members>
+        <members>Persona.Executive</members>
+        <members>Persona.Investment_Committee</members>
+        <members>Persona.Trader</members>
         <members>TradingField.AccountNumber</members>
         <members>TradingField.AdjustAmount</members>
         <members>TradingField.AdjustPercent</members>
@@ -215,6 +248,7 @@
         <members>TradingObject.Restriction</members>
         <members>TradingObject.Security</members>
         <members>TradingObject.Transaction</members>
+        <members>TradingSchema.AccountId</members>
         <members>TradingSchema.Price</members>
         <members>TradingSchema.SecurityTypeName</members>
         <members>TradingSetting.Default</members>
@@ -222,7 +256,11 @@
     </types>
     <types>
         <members>ConnectionSetting__mdt</members>
+        <members>EndpointSetting__mdt</members>
+        <members>ErrorEvent__e</members>
         <members>ErrorLog__c</members>
+        <members>HttpResponse__e</members>
+        <members>Persona__mdt</members>
         <members>SierraEvent__e</members>
         <members>TradingField__mdt</members>
         <members>TradingMap__mdt</members>
@@ -240,8 +278,9 @@
         <name>FlexiPage</name>
     </types>
     <types>
-        <members>ConnectionSetting__mdt-Connection Setting Layout</members>
+        <members>EndpointSetting__mdt-Endpoint Setting Layout</members>
         <members>ErrorLog__c-Error Log Layout</members>
+        <members>Persona__mdt-Persona Layout</members>
         <members>TradingField__mdt-Trading Field Layout</members>
         <members>TradingMap__mdt-Trading Map Layout</members>
         <members>TradingObject__mdt-Trading Object Layout</members>
@@ -255,6 +294,7 @@
     </types>
     <types>
         <members>ErrorLog__c.All</members>
+        <members>Persona__mdt.Default</members>
         <name>ListView</name>
     </types>
     <types>
@@ -270,6 +310,7 @@
         <members>AddeparAPI</members>
         <members>AddeparId</members>
         <members>AddeparPbo</members>
+        <members>ApexDevNet</members>
         <name>RemoteSiteSetting</name>
     </types>
     <types>
@@ -286,5 +327,5 @@
         <members>ErrorLog__c.Object_Info</members>
         <name>WebLink</name>
     </types>
-    <version>53.0</version>
+    <version>55.0</version>
 </Package>

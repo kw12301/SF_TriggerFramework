@@ -17,6 +17,11 @@ public with sharing class Links {
 	public String related {get;set;} 
 
 	/**
+	 * @description the value of the Next link if the response is paged
+	 */
+	public NextLink next {get;set;} 
+
+	/**
 	 * @description Constructor to create an instance of Links from a JSONParser object
 	 * @param JSONParser
 	 */
@@ -29,8 +34,9 @@ public with sharing class Links {
 						this.self = parser.getText();
 					}else if(text == 'related'){
 						this.related = parser.getText();
+					} else if(text == 'next'){
+						this.next = new NextLink(parser);
 					} else {
-						System.debug(LoggingLevel.WARN, 'Links consuming unrecognized property: '+text);
 						ConsumeObject.destroy(parser);
 					}
 				}
